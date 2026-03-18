@@ -44,10 +44,15 @@ struct ContentView: View {
 
             Text("Hello, Michael")
                 .font(.largeTitle)
-
-            Button("Load test.txt from Firebase") {
+a
+            Button("Load test from Firebase") {
                 Task {
                     await loadTestFile()
+                }
+            }
+            Button("Load test1 from Firebase") {
+                Task {
+                    await loadTestOneFile()
                 }
             }
             .buttonStyle(.borderedProminent)
@@ -60,6 +65,24 @@ struct ContentView: View {
         .padding()
     }
 
+    func loadTestOneFile() async {
+
+        do {
+            let storage = Storage.storage()
+            let ref = storage.reference(withPath: "test1.txt")
+
+            let data = try await ref.data(maxSize: 1 * 1024 * 1024)
+
+            if let text = String(data: data, encoding: .utf8) {
+                fileContents = text
+            } else {
+                fileContents = "File downloaded but could not decode text."
+            }
+
+        } catch {
+            fileContents = "Error: \(error.localizedDescription)"
+        }
+    }
     func loadTestFile() async {
 
         do {

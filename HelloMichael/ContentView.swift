@@ -50,12 +50,14 @@ struct ContentView: View {
                     await loadTestFile()
                 }
             }
+            .buttonStyle(.borderedProminent)
             Button("Load test1 from Firebase") {
                 Task {
                     await loadTestOneFile()
                 }
             }
             .buttonStyle(.borderedProminent)
+            
 
             ScrollView {
                 Text(fileContents)

@@ -44,7 +44,7 @@ struct ContentView: View {
 
             Text("Hello, Michael")
                 .font(.largeTitle)
-a
+
             Button("Load test from Firebase") {
                 Task {
                     await loadTestFile()
